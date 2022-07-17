@@ -458,6 +458,24 @@ async def settings(client, message):
             reply_to_message_id=message.message_id
         )
 
+@Client.on_message(
+    filters.command(["pin"]) &
+    admin_fliter
+)
+async def pin(_, message: Message):
+    if not message.reply_to_message:
+        return
+    await message.reply_to_message.pin()
+
+
+@Client.on_message(
+    filters.command(["unpin"]) &
+    admin_fliter
+)
+async def unpin(_, message: Message):
+    if not message.reply_to_message:
+        return
+    await message.reply_to_message.unpin()
 
 
 @Client.on_message(filters.command('set_template'))
